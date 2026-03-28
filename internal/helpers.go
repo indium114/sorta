@@ -6,17 +6,31 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"strings"
 )
 
-// get the category for a given MIME type
-func GetCategory(mime string) string {
-	for category, types := range Categories {
-		for _, t := range types {
+// get the category for a given file
+func GetCategory(mime string, filename string) string {
+	// first pass, based on MIME type
+	for category, data := range Categories {
+		for _, t := range data.MimeTypes {
 			if mime == t {
 				return category
 			}
 		}
 	}
+
+	// do a second pass based on the file extension
+	ext := strings.ToLower(filepath.Ext(filename))
+
+	for category, data := range Categories {
+		for _, e := range data.Extensions {
+			if ext == e {
+				return category
+			}
+		}
+	}
+
 	return "Other"
 }
 
@@ -62,7 +76,7 @@ func RunSorter(dir string) {
 			continue
 		}
 
-		category := GetCategory(mime)
+		category := GetCategory(mime, entry.Name())
 		newDir := filepath.Join(dir, category)
 
 		if err := os.MkdirAll(newDir, 0755); err != nil {
