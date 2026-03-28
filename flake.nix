@@ -25,17 +25,17 @@
 
         packages.sorta = pkgs.buildGoModule {
           pname = "sorta";
-          version = "2026.03.01-a";
+          version = "2026.03.28-a";
 
           src = self;
 
-          vendorHash = "sha256-aJllcMJduoi8VBWMJWsxm8swXtNonYZzX8etmNZePzc=";
+          vendorHash = pkgs.lib.fakeHash;
 
           subPackages = [ "." ];
           ldflags = [ "-s" "-w" ];
 
           meta = with pkgs.lib; {
-            description = "An extensible search tool, inspired by Raycast and Vicinae";
+            description = "A simple CLI tool to sort files based on MIME type";
             license = licenses.mit;
             platforms = platforms.all;
           };
