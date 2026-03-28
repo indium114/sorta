@@ -6,6 +6,7 @@ var Categories = map[string][]string{
 		"application/x-tar",
 		"application/gzip",
 		"application/x-7z-compressed",
+		"appliction/vnd.rar",
 	},
 	"Images": {
 		"image/jpeg",
@@ -17,6 +18,7 @@ var Categories = map[string][]string{
 		"audio/mpeg",
 		"audio/wav",
 		"audio/ogg",
+		"audio/midi",
 	},
 	"Video": {
 		"video/mp4",
@@ -25,5 +27,14 @@ var Categories = map[string][]string{
 	"Documents": {
 		"application/pdf",
 		"text/plain",
+		"text/markdown",
+		"application/vnd.oasis.opendocument.presentation",
+		"application/vnd.oasis.opendocument.spreadsheet",
+		"application/vnd.oasis.opendocument.text",
+	},
+	"Code": {
+		"text/javascript",
+		"application/json",
+		"application/x-httpd-php",
 	},
 }
