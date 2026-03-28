@@ -61,7 +61,13 @@ func RunSorter(dir string) {
 	}
 
 	for _, entry := range entries {
+		// skip directories
 		if entry.IsDir() {
+			continue
+		}
+
+		// skip hidden files
+		if strings.HasPrefix(entry.Name(), ".") {
 			continue
 		}
 
