@@ -48,6 +48,7 @@ var Categories = map[string]Category{
 			".avif",
 			".bmp",
 			".tiff",
+			".heic",
 		},
 	},
 	"Audio": {
@@ -66,7 +67,6 @@ var Categories = map[string]Category{
 			".mid",
 			".midi",
 			".m4a",
-			".heic",
 		},
 	},
 	"Video": {
@@ -82,6 +82,7 @@ var Categories = map[string]Category{
 			".webm",
 			".wmv",
 			".mkv",
+			".avi",
 		},
 	},
 	"Documents": {
@@ -156,6 +157,7 @@ var Categories = map[string]Category{
 			".hh",
 			".cpp",
 			".hpp",
+			".v",
 		},
 	},
 }
