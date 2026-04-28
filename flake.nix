@@ -25,7 +25,7 @@
 
         packages.sorta = pkgs.buildGoModule {
           pname = "sorta";
-          version = "2026.03.28-a";
+          version = "2026.04.28-a";
 
           src = self;
 
