@@ -51,7 +51,7 @@ func DetectMime(path string) (string, error) {
 	return http.DetectContentType(buffer), nil
 }
 
-func RunSorter(dir string) {
+func RunSorter(dir string, dry bool) {
 	log.Info("Starting sort", "directory", dir)
 
 	entries, err := os.ReadDir(dir)
@@ -85,27 +85,29 @@ func RunSorter(dir string) {
 		category := GetCategory(mime, entry.Name())
 		newDir := filepath.Join(dir, category)
 
-		if err := os.MkdirAll(newDir, 0755); err != nil {
-			log.Error("Failed to create directory",
-				"dir", newDir,
-				"err", err,
-			)
-			continue
-		}
+		if !dry {
+			if err := os.MkdirAll(newDir, 0755); err != nil {
+				log.Error("Failed to create directory",
+					"dir", newDir,
+					"err", err,
+				)
+				continue
+			}
 
-		newPath := filepath.Join(newDir, entry.Name())
+			newPath := filepath.Join(newDir, entry.Name())
 
-		// Handle collisions
-		if _, err := os.Stat(newPath); err == nil {
-			newPath = filepath.Join(newDir, "copy_"+entry.Name())
-		}
+			// Handle collisions
+			if _, err := os.Stat(newPath); err == nil {
+				newPath = filepath.Join(newDir, "copy_"+entry.Name())
+			}
 
-		if err := os.Rename(oldPath, newPath); err != nil {
-			log.Error("Failed to move file",
-				"file", entry.Name(),
-				"err", err,
-			)
-			continue
+			if err := os.Rename(oldPath, newPath); err != nil {
+				log.Error("Failed to move file",
+					"file", entry.Name(),
+					"err", err,
+				)
+				continue
+			}
 		}
 
 		log.Info("Moved file",

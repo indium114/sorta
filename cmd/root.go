@@ -11,6 +11,7 @@ import (
 )
 
 var dir string
+var dry bool
 
 var rootCmd = &cobra.Command{
 	Use:   "sorta [directory]",
@@ -26,8 +27,12 @@ var rootCmd = &cobra.Command{
 			dir = "."
 		}
 
-		internal.RunSorter(dir)
+		internal.RunSorter(dir, dry)
 	},
+}
+
+func init() {
+	rootCmd.Flags().BoolVarP(&dry, "dry", "d", false, "dry run; don't actually move any files")
 }
 
 func Execute() {
