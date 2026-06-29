@@ -21,6 +21,7 @@
 
   FLAGS
 
+    -d --dry              Dry run; don't actually move any files
     -h --help             Help for sorta
     -v --version          Version for sorta
 ```
